@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() {
   runApp(
@@ -29,20 +30,30 @@ class Dicee extends StatefulWidget {
 }
 
 class _DiceeState extends State<Dicee> {
+  int leftDiceNumber = 1;
+  int rightDiceNumber = 1;
+  void changeNumber() {
+    setState(() {
+      leftDiceNumber = Random().nextInt(5) + 1;
+      rightDiceNumber = Random().nextInt(5) + 1;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Row(
         children: [
           Expanded(
-            child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-                child: Image.asset('images/dice1.png')),
+            child: FlatButton(
+              onPressed: () =>changeNumber(),
+              child: Image.asset('images/dice$leftDiceNumber.png'),
+            ),
           ),
           Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-              child: Image.asset('images/dice1.png'),
+            child: FlatButton(
+              onPressed: () =>changeNumber(),
+              child: Image.asset('images/dice$rightDiceNumber.png'),
             ),
           ),
         ],
